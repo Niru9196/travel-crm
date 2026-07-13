@@ -30,8 +30,8 @@ export default function BookingRow({
     <TableRow
       key={r.id}
       className={cn(
-        "bg-white ring-1 ring-inset ring-gray-100 shadow-sm transition-shadow duration-150 hover:shadow-md rounded-3xl",
-        isSelected && "bg-violet-50/60 ring-violet-200",
+        "bg-white border-b border-slate-100 transition-colors hover:bg-slate-50",
+        isSelected && "bg-violet-50/60",
         approvalBorder
       )}
     >
@@ -49,13 +49,13 @@ export default function BookingRow({
         <Button
           variant="ghost"
           onClick={() => navigate("/finance/ledger/CUST-1042")}
-          className="hover:text-violet-600 hover:underline text-left p-0 h-auto"
+          className="hover:text-violet-600 hover:underline text-left p-0 h-auto text-sm leading-5 font-medium text-darkest-grey"
         >
           {r.pax}
         </Button>
       </TableCell>
-      <TableCell className="px-5 py-4 text-gray-700 whitespace-nowrap">{r.travelDate}</TableCell>
-      <TableCell className="px-5 py-4"><ServiceCell service={r.service} sub={r.sub} /></TableCell>
+      <TableCell className="px-5 py-4 text-darkest-grey whitespace-nowrap text-sm leading-5 font-medium">{r.travelDate}</TableCell>
+      <TableCell className="px-5 py-4 text-darkest-grey text-sm leading-5 font-medium"><ServiceCell service={r.service} sub={r.sub} /></TableCell>
       <TableCell className="px-5 py-4">
         <StatusPill status={getDisplayStatus(r)} />
       </TableCell>
@@ -65,7 +65,9 @@ export default function BookingRow({
       {showVoucherTasks && (
         <>
           <TableCell className="px-5 py-4">
-            {r.voucher ? (
+            {tab === "waiting" && r.approval === "rejected" ? (
+              <span className="text-gray-300">--</span>
+            ) : r.voucher ? (
               <div className="flex items-center gap-1">
                 <Button variant="ghost" className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-violet-600 hover:bg-gray-50 p-0">
                   <FileText size={14} />
@@ -77,7 +79,9 @@ export default function BookingRow({
             )}
           </TableCell>
           <TableCell className="px-5 py-4">
-            {r.tasks > 0 ? (
+            {tab === "waiting" && r.approval === "rejected" ? (
+              <span className="text-gray-300">--</span>
+            ) : r.tasks > 0 ? (
               <div className="relative w-8 h-8 flex items-center justify-center">
                 <ClipboardList size={16} className="text-amber-500" />
                 <span className="absolute -top-1 -right-1 text-[9px] font-bold text-violet-600">{r.tasks}</span>

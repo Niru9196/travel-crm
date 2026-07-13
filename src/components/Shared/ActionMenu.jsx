@@ -26,6 +26,7 @@ export const MORE_ACTIONS_APPROVED = [
 export const MORE_ACTIONS_PENDING = [
   { label: "Edit", icon: Pencil },
   { label: "Delete", icon: Trash2, danger: true },
+  { label: "Link", icon: Link2 },
   { label: "Duplicate", icon: Copy },
 ];
 export const MORE_ACTIONS_REJECTED = [

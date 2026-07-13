@@ -64,20 +64,37 @@ export default function ColumnHeader({
         <Button
           variant="ghost"
           className={cn(
-            "flex items-center gap-1.5 text-xs uppercase tracking-wide font-semibold whitespace-nowrap group focus:outline-hidden p-0 h-auto rounded-none bg-transparent",
-            isActive ? "text-violet-600" : "text-gray-400 hover:text-gray-600"
+            "flex items-center gap-2 text-sm uppercase tracking-wide font-medium whitespace-nowrap group focus:outline-hidden p-0 h-auto rounded-none bg-transparent",
+            isActive ? "text-violet-600" : "text-grey-light hover:text-slate-700"
           )}
         >
-          {label}
-          {sortDir === "asc" && <ArrowUp size={12} className="text-violet-600" />}
-          {sortDir === "desc" && <ArrowDown size={12} className="text-violet-600" />}
-          {!sortDir && hasFilter && activeFilters.length > 0 && (
-            <span className="w-4 h-4 rounded-full bg-violet-100 text-violet-600 text-[9px] font-bold flex items-center justify-center">
-              {activeFilters.length}
+          <span>{label}</span>
+          {hasSort && (
+            <span className="flex flex-col items-center justify-center gap-0.5">
+              <ArrowUp
+                size={10}
+                className={cn(
+                  "transition-opacity",
+                  sortDir === "asc" ? "text-violet-600 opacity-100" : "text-grey-light"
+                )}
+              />
+              <ArrowDown
+                size={10}
+                className={cn(
+                  "transition-opacity",
+                  sortDir === "desc" ? "text-violet-600 opacity-100" : "text-grey-light"
+                )}
+              />
             </span>
           )}
-          {!sortDir && activeFilters.length === 0 && (
-            <Filter size={11} className="opacity-0 group-hover:opacity-100 transition-opacity text-gray-400" />
+          {hasFilter && (
+            <Filter
+              size={12}
+              className={cn(
+                "transition-opacity",
+                activeFilters.length > 0 ? "text-violet-600 opacity-100" : "text-grey-light"
+              )}
+            />
           )}
         </Button>
       </DropdownMenuTrigger>

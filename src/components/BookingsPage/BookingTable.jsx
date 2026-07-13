@@ -93,12 +93,12 @@ export default function BookingTable({
       <div className="border-t border-gray-100" />
 
       <div className="overflow-x-auto pb-4">
-        <Table className="w-full min-w-full text-sm border-separate border-spacing-y-3">
-          <TableHeader>
-            <TableRow className="bg-white text-left text-xs uppercase tracking-wide text-gray-400 border-b border-gray-100">
+        <Table className="w-full min-w-full text-sm border-separate border-spacing-y-3 -mt-3">
+          <TableHeader className="bg-dark-grey h-14">
+            <TableRow className="text-left text-xs uppercase tracking-wide text-slate-500 border-b border-slate-200">
               {selectMode && <TableHead className="px-5 py-3 w-10" />}
               <TableHead className="px-5 py-3">
-                <span className="text-xs uppercase tracking-wide font-semibold text-gray-400">Booking ID</span>
+                <span className="text-sm uppercase tracking-wide font-medium text-grey-light">Booking ID</span>
               </TableHead>
               <TableHead className="px-5 py-3">
                 <ColumnHeader
@@ -141,20 +141,20 @@ export default function BookingTable({
                 />
               </TableHead>
               <TableHead className="px-5 py-3">
-                <span className="text-xs uppercase tracking-wide font-semibold text-gray-400">Owner</span>
+                <span className="text-sm uppercase tracking-wide font-medium text-grey-light">Owner</span>
               </TableHead>
               {showVoucherTasks && (
                 <>
                   <TableHead className="px-5 py-3">
-                    <span className="text-xs uppercase tracking-wide font-semibold text-gray-400">Voucher</span>
+                    <span className="text-sm uppercase tracking-wide font-medium text-grey-light">Voucher</span>
                   </TableHead>
                   <TableHead className="px-5 py-3">
-                    <span className="text-xs uppercase tracking-wide font-semibold text-gray-400">Tasks</span>
+                    <span className="text-sm uppercase tracking-wide font-medium text-grey-light">Tasks</span>
                   </TableHead>
                 </>
               )}
               <TableHead className="px-5 py-3">
-                <span className="text-xs uppercase tracking-wide font-semibold text-gray-400">Actions</span>
+                <span className="text-sm uppercase tracking-wide font-medium text-grey-light">Actions</span>
               </TableHead>
             </TableRow>
           </TableHeader>

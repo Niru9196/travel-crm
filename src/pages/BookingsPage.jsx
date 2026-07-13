@@ -5,7 +5,7 @@ import { currency } from "@/components/Shared/Shared";
 import BookingSummary from "@/components/BookingsPage/BookingSummary";
 import BookingFilters from "@/components/BookingsPage/BookingFilters";
 import BookingTable from "@/components/BookingsPage/BookingTable";
-import { applyBookingFilters, applyColumnFilters, sortRows, computeBookingSummary } from "@/utils/booking-page-utils";
+import { applyBookingFilters, applyColumnFilters, sortRows, sortRowsByBookingDate, computeBookingSummary } from "@/utils/booking-page-utils";
 
 export default function BookingsPage() {
   const navigate = useNavigate();
@@ -28,9 +28,14 @@ export default function BookingsPage() {
   const [selected, setSelected] = useState([]);
 
   const rows = useMemo(() => {
-    if (tab === "deleted") return DELETED_BOOKINGS;
-    if (tab === "waiting") return RAW_BOOKINGS.filter((r) => r.approvalRequired);
-    return RAW_BOOKINGS.filter((r) => !r.approvalRequired || r.approval === "approved");
+    const filtered =
+      tab === "deleted"
+        ? DELETED_BOOKINGS
+        : tab === "waiting"
+        ? RAW_BOOKINGS.filter((r) => r.approvalRequired)
+        : RAW_BOOKINGS.filter((r) => !r.approvalRequired || r.approval === "approved");
+
+    return sortRowsByBookingDate(filtered);
   }, [tab]);
 
   const filteredByWaiting = useMemo(() => {
@@ -56,7 +61,10 @@ export default function BookingsPage() {
   const end = Math.min(page * rowsPerPage, sortedRows.length);
   const pageRows = sortedRows.slice(start - 1, end);
 
-  const { netAmount, youGive, youGet } = useMemo(() => computeBookingSummary(RAW_BOOKINGS), []);
+  const { netAmount, youGive, youGet, vendorPending, customerPending } = useMemo(
+    () => computeBookingSummary(RAW_BOOKINGS),
+    []
+  );
 
   const netTone = youGet > youGive ? "green" : "red";
 
@@ -98,14 +106,19 @@ export default function BookingsPage() {
 
   function getDisplayStatus(row) {
     if (statusView === "payment") {
-      if (tab === "waiting" && (row.approval === "pending" || row.approval === "rejected")) {
-        return "Pending";
+      if (tab === "waiting") {
+        return row.approval === "approved" ? row.paymentStatus || row.status : "Pending";
       }
       if (tab === "deleted") {
         return "Pending";
       }
       return row.paymentStatus || row.status;
     }
+
+    if (tab === "waiting") {
+      return row.approval === "approved" ? row.bookingStatus || row.status : "Pending";
+    }
+
     return row.bookingStatus || row.status;
   }
 
@@ -125,15 +138,21 @@ export default function BookingsPage() {
         youGive={currency(youGive)}
         youGet={currency(youGet)}
         netTone={netTone}
+        vendorPending={vendorPending}
+        customerPending={customerPending}
       />
 
       <BookingFilters
         openFilter={openFilter}
         setOpenFilter={setOpenFilter}
         bookingDateFilter={bookingDateFilter}
+        setBookingDateFilter={setBookingDateFilter}
         travelDateFilter={travelDateFilter}
+        setTravelDateFilter={setTravelDateFilter}
         ownerFilter={ownerFilter}
+        setOwnerFilter={setOwnerFilter}
         servicesFilter={servicesFilter}
+        setServicesFilter={setServicesFilter}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         resetAllFilters={resetAllFilters}

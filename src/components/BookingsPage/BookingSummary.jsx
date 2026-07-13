@@ -16,12 +16,14 @@ export default function BookingSummary({
   youGive,
   youGet,
   netTone,
+  vendorPending,
+  customerPending,
 }) {
   return (
     <div className="flex items-center justify-between mb-4">
       <div className="flex items-center gap-6">
         <Pill icon={Calculator} label="Net" value={netAmount} tone={netTone} />
-        <PendingAmountPopup customer={netAmount} vendor={netAmount}>
+        <PendingAmountPopup customer={customerPending} vendor={vendorPending}>
           <Pill icon={ArrowUpRight} label="You Give" value={youGive} tone="red" />
         </PendingAmountPopup>
         <Pill icon={ArrowDownLeft} label="You Get" value={youGet} tone="green" />

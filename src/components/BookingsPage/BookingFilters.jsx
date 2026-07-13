@@ -11,9 +11,13 @@ export default function BookingFilters({
   openFilter,
   setOpenFilter,
   bookingDateFilter,
+  setBookingDateFilter,
   travelDateFilter,
+  setTravelDateFilter,
   ownerFilter,
+  setOwnerFilter,
   servicesFilter,
+  setServicesFilter,
   searchQuery,
   setSearchQuery,
   resetAllFilters,
@@ -21,8 +25,8 @@ export default function BookingFilters({
 }) {
   return (
     <div className="bg-white border border-gray-200 rounded-3xl p-5 mb-4 shadow-sm">
-      <div className="grid gap-4 lg:grid-cols-[minmax(240px,_1fr)_minmax(240px,_1fr)_minmax(240px,_1fr)_minmax(220px,_1fr)]">
-        <div className="space-y-2">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-end">
+        <div className="relative space-y-2 lg:flex-1">
           <div className="text-xs font-semibold text-gray-600">Booking Date</div>
           <Button
             variant="ghost"
@@ -46,7 +50,7 @@ export default function BookingFilters({
           )}
         </div>
 
-        <div className="space-y-2">
+        <div className="relative space-y-2 lg:flex-1">
           <div className="text-xs font-semibold text-gray-600">Travel Date</div>
           <Button
             variant="ghost"
@@ -70,7 +74,7 @@ export default function BookingFilters({
           )}
         </div>
 
-        <div className="space-y-2">
+        <div className="relative space-y-2 lg:flex-1">
           <div className="text-xs font-semibold text-gray-600">Booking Owner</div>
           <Button
             variant="ghost"
@@ -89,7 +93,7 @@ export default function BookingFilters({
           )}
         </div>
 
-        <div className="space-y-2">
+        <div className="relative space-y-2 lg:flex-1">
           <div className="text-xs font-semibold text-gray-600">Booking Type</div>
           <Button
             variant="ghost"
@@ -103,9 +107,7 @@ export default function BookingFilters({
             <ServicesFilter onApply={setServicesFilter} onClose={() => setOpenFilter(null)} />
           )}
         </div>
-      </div>
 
-      <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
         <div className="flex-1 min-w-0 rounded-2xl border border-gray-200 bg-white px-4 py-3 shadow-sm">
           <div className="flex items-center gap-3">
             <Search size={16} className="text-gray-400" />
@@ -123,10 +125,11 @@ export default function BookingFilters({
             )}
           </div>
         </div>
+
         <Button
           variant="ghost"
           onClick={resetAllFilters}
-          className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-gray-200 bg-white text-gray-500 shadow-sm transition hover:bg-gray-50"
+          className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-gray-200 bg-white text-gray-500 shadow-sm transition hover:bg-gray-50"
           title="Reset all filters"
         >
           <RefreshCw size={16} />

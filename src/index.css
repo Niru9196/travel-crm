@@ -71,6 +71,13 @@
   --color-brand-600: #6D28D9;
   --color-brand-700: #5B21B6;
 
+  --color-grey-light: #818181;
+  --text-grey-light: #818181;
+  --color-dark-grey: #F3F3F3;
+  --text-dark-grey: #F3F3F3;
+  --color-darkest-grey: #020202;
+  --text-darket-grey: #020202;
+
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);

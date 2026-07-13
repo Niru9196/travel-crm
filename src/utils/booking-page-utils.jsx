@@ -131,19 +131,35 @@ export function sortRows(rows, sortConfig) {
   });
 }
 
+export function sortRowsByBookingDate(rows) {
+  return [...rows].sort((a, b) => {
+    const aDate = parseMockDate(a.bookingDate);
+    const bDate = parseMockDate(b.bookingDate);
+
+    if (!aDate || !bDate) return 0;
+    return bDate - aDate;
+  });
+}
+
 export function computeBookingSummary(bookings) {
   const approvedBookings = bookings.filter((r) => !r.approvalRequired || r.approval === "approved");
 
   let give = 0;
   let get = 0;
+  let vendorPending = 0;
+  let customerPending = 0;
 
   approvedBookings.forEach((r) => {
     if (r.isRefund) {
       give += r.customerPending || 0;
       get += r.vendorPending || 0;
+      customerPending += r.customerPending || 0;
+      vendorPending += r.vendorPending || 0;
     } else {
       give += r.vendorPending || 0;
       get += r.customerPending || 0;
+      vendorPending += r.vendorPending || 0;
+      customerPending += r.customerPending || 0;
     }
   });
 
@@ -151,5 +167,7 @@ export function computeBookingSummary(bookings) {
     netAmount: give - get,
     youGive: give,
     youGet: get,
+    vendorPending,
+    customerPending,
   };
 }

@@ -1,7 +1,9 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { SidebarProvider } from "@/hooks/useSidebar";
-import Sidebar from "@/layout/Sidebar";import Topbar from "@/layout/Topbar";import BookingsPage from "@/pages/BookingsPage";
+import Sidebar from "@/layout/Sidebar";
+import Topbar from "@/layout/Topbar";
+import BookingsPage from "@/pages/BookingsPage";
 import BookingCalendarPage from "@/pages/BookingCalendarPage";
 import CustomerLedgerPage from "@/pages/CustomerLedgerPage";
 
@@ -10,7 +12,7 @@ export default function App() {
     <SidebarProvider defaultOpen={true}>
       <div className="flex">
         <Sidebar />
-        <div className="flex-1 min-w-0">
+        <div className="flex-1 min-w-0 overflow-y-auto">
           <Routes>
             <Route path="/" element={<Navigate to="/finance/bookings" replace />} />
             <Route

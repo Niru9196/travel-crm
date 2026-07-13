@@ -6,14 +6,14 @@ import { Button } from "@/components/ui/button";
 export default function Topbar({ crumbs = [], children }) {
   return (
     <>
-      <div className="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-sm">
-        <div className="max-w-[1400px] mx-auto px-6 py-4">
+      <div className="sticky top-0 z-40 w-full bg-white border-b border-gray-200 shadow-sm">
+        <div className="mx-auto px-6 py-4">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-center gap-2 text-sm text-gray-500">
               <Home size={16} className="text-gray-400" />
               {crumbs.map((c, i) => (
                 <React.Fragment key={`${c}-${i}`}>
-                  <ChevronRight size={13} className="text-gray-300" />
+                  <span className="text-base font-normal text-black">/</span>
                   <span className={i === crumbs.length - 1 ? "text-violet-600 font-medium" : ""}>{c}</span>
                 </React.Fragment>
               ))}
@@ -44,7 +44,7 @@ export default function Topbar({ crumbs = [], children }) {
           </div>
         </div>
       </div>
-      <div className="max-w-[1400px] mx-auto px-6 py-6">
+      <div className="mx-auto px-6 py-6">
         {children}
       </div>
     </>

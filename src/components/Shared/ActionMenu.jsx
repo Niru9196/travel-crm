@@ -151,16 +151,18 @@ export function Pagination({ page, setPage, totalPages, rowsPerPage, setRowsPerP
   return (
     <div className="flex items-center justify-between px-5 py-4 border-t border-gray-100">
       {/* Left: Rows per page */}
-      <div className="flex items-center gap-2 text-xs text-gray-500">
-        Rows per page:
-        <Select value={String(rowsPerPage)} onValueChange={(val) => { setRowsPerPage(Number(val)); setPage(1); }}>
-          <SelectTrigger className="border border-gray-200 rounded-lg px-2 py-1 h-auto text-gray-700 focus:outline-hidden">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {ROWS_PER_PAGE_OPTIONS.map((n) => <SelectItem key={n} value={String(n)}>{n}</SelectItem>)}
-          </SelectContent>
-        </Select>
+      <div className="flex-1 min-w-0 flex flex-col sm:flex-row sm:items-center gap-2 text-xs text-gray-500">
+        <span className="whitespace-nowrap">Rows per page:</span>
+        <div className="min-w-0">
+          <Select value={String(rowsPerPage)} onValueChange={(val) => { setRowsPerPage(Number(val)); setPage(1); }}>
+            <SelectTrigger className="border border-gray-200 rounded-lg px-2 py-1 h-auto text-gray-700 focus:outline-hidden w-full">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {ROWS_PER_PAGE_OPTIONS.map((n) => <SelectItem key={n} value={String(n)}>{n}</SelectItem>)}
+            </SelectContent>
+          </Select>
+        </div>
       </div>
 
       {/* Center: Showing X-Y of Z */}

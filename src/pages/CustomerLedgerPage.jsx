@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   Eye, Pencil, RefreshCw, CalendarDays, ChevronDown,
 } from "lucide-react";
-import Topbar from "@/layout/Topbar";
 import { Toggle, currency } from "@/components/Shared/Shared";
 import { Pagination } from "@/components/Shared/ActionMenu";
 import DateFilterDropdown from "@/components/Shared/DateFilterDropdown";
@@ -65,9 +64,7 @@ export default function CustomerLedgerPage() {
   const pageRows = rows.slice(start - 1, end);
 
   return (
-    <div className="mx-auto px-6 py-6">
-      <Topbar crumbs={["Finance", "Bookings", "Ledger"]} />
-
+    <>
       {/* Heading */}
       <div className="flex items-center gap-2 mb-5">
         <h1 className="text-lg font-semibold text-gray-900">
@@ -229,6 +226,6 @@ export default function CustomerLedgerPage() {
       {showDownload && <DownloadLedgerModal onClose={() => setShowDownload(false)} />}
       {showShare && <ShareLedgerModal onClose={() => setShowShare(false)} />}
       {sideSheet && <PaymentSideSheet kind={sideSheet} onClose={() => setSideSheet(null)} />}
-    </div>
+    </>
   );
 }

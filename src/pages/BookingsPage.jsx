@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import Topbar from "@/layout/Topbar";
 import { RAW_BOOKINGS, DELETED_BOOKINGS } from "@/data/mockData";
 import { currency } from "@/components/Shared/Shared";
 import BookingSummary from "@/components/BookingsPage/BookingSummary";
@@ -113,9 +112,7 @@ export default function BookingsPage() {
   const showVoucherTasks = tab !== "deleted" && !(tab === "waiting" && waitingFilter === "Rejected");
 
   return (
-    <div className="mx-auto px-6 py-6">
-      <Topbar crumbs={["Finance", "Bookings"]} />
-
+    <>
       <BookingSummary
         navigate={navigate}
         selectMode={selectMode}
@@ -176,6 +173,6 @@ export default function BookingsPage() {
         statusView={statusView}
         setStatusView={setStatusView}
       />
-    </div>
+    </>
   );
 }

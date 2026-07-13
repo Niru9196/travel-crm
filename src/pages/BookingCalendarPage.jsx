@@ -4,7 +4,6 @@ import {
   Calculator, ArrowUpRight, ArrowDownLeft, CalendarDays, Filter,
   ChevronLeft, ChevronRight, MoreVertical, Search,
 } from "lucide-react";
-import Topbar from "@/layout/Topbar";
 import { currency } from "@/components/Shared/Shared";
 import { CALENDAR_DAYS, TIME_SLOTS } from "@/data/mockData";
 import { Input } from "@/components/ui/input";
@@ -48,9 +47,7 @@ export default function BookingCalendarPage() {
   const totalCompleted = 14, totalOnTrip = 3, totalUpcoming = 0, totalCancelled = 1;
 
   return (
-    <div className="mx-auto px-6 py-6">
-      <Topbar crumbs={["Finance", "Bookings", "Booking Calendar"]} />
-
+    <>
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-6">
           <Pill icon={Calculator} label="Net" value={currency(4870)} tone="green" />
@@ -172,6 +169,6 @@ export default function BookingCalendarPage() {
       </div>
 
       <ContextMenu pos={menuPos} onClose={() => setMenuPos(null)} />
-    </div>
+    </>
   );
 }

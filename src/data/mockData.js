@@ -84,9 +84,9 @@ export const DELETED_BOOKINGS = [
 ];
 
 export const STATUS_STYLES = {
-  Paid: "bg-emerald-50 text-emerald-600",
-  "Partially Paid": "bg-amber-50 text-amber-600",
-  Pending: "bg-amber-50 text-amber-600",
+  Paid: "bg-[#F0FDF4] text-[#15803D] border border-[#DCFCE7]",
+  "Partially Paid": "bg-[#FEF9C3] text-[#854D0E] border border-[#FEF9C3]",
+  Pending: "bg-[#FEF9C3] text-[#854D0E] border border-[#FEF9C3]",
 };
 
 export const CALENDAR_DAYS = [

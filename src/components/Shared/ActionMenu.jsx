@@ -43,7 +43,7 @@ export function ActionMenu({ items }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center hover:bg-gray-50 text-gray-500 focus:outline-hidden p-0 h-auto">
+        <Button variant="ghost" className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center hover:bg-gray-50 text-gray-500 focus:outline-hidden p-0">
           <MoreHorizontal size={16} />
         </Button>
       </DropdownMenuTrigger>

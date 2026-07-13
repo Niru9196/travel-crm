@@ -57,7 +57,7 @@ export default function BookingSummary({
         <Button
           variant="ghost"
           onClick={() => navigate("/finance/bookings/calendar")}
-          className="w-9 h-9 rounded-xl border border-gray-200 bg-white flex items-center justify-center hover:bg-gray-50 p-0 h-auto"
+          className="w-9 h-9 rounded-xl border border-gray-200 bg-white flex items-center justify-center hover:bg-gray-50 p-0 h-9"
         >
           <CalendarDays size={16} className="text-gray-500" />
         </Button>

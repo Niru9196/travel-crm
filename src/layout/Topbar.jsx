@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 export default function Topbar({ crumbs = [], children }) {
   return (
     <>
-      <div className="sticky top-0 z-40 w-full bg-white border-b border-gray-200 shadow-sm">
+      <div className="sticky top-0 z-40 w-full bg-[#F8F8F8]">
         <div className="mx-auto px-6 py-4">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-center gap-2 text-sm text-gray-500">
@@ -44,7 +44,7 @@ export default function Topbar({ crumbs = [], children }) {
           </div>
         </div>
       </div>
-      <div className="mx-auto px-6 py-6">
+      <div className="mx-auto px-6 py-6 bg-[#F8F8F8]">
         {children}
       </div>
     </>

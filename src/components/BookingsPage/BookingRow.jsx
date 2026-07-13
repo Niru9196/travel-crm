@@ -4,7 +4,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { StatusPill, OwnerAvatars, ServiceCell } from "@/components/Shared/Shared";
 import { ActionMenu, MORE_ACTIONS_APPROVED, MORE_ACTIONS_PENDING, MORE_ACTIONS_REJECTED, MORE_ACTIONS_DELETED } from "@/components/Shared/ActionMenu";
-import { FileText, ClipboardList, Wallet, Check, X, ChevronDown } from "lucide-react";
+import { FileText, ClipboardList, Wallet, Check, X, ChevronDown, IndianRupee } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function BookingRow({
@@ -68,26 +68,47 @@ export default function BookingRow({
             {tab === "waiting" && r.approval === "rejected" ? (
               <span className="text-gray-300">--</span>
             ) : r.voucher ? (
-              <div className="flex items-center gap-1">
-                <Button variant="ghost" className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-violet-600 hover:bg-gray-50 p-0">
+              <div className="inline-flex items-center rounded-lg border border-gray-200 bg-white overflow-hidden">
+                <Button
+                  variant="ghost"
+                  className="w-8 h-8 flex items-center justify-center text-violet-600 hover:bg-gray-50 p-0 rounded-none"
+                >
                   <FileText size={14} />
                 </Button>
-                <ChevronDown size={14} className="text-gray-400" />
+                <div className="w-px h-5 bg-gray-200" />
+                <Button
+                  variant="ghost"
+                  className="w-6 h-8 flex items-center justify-center text-gray-400 hover:bg-gray-50 p-0 rounded-none"
+                >
+                  <ChevronDown size={14} />
+                </Button>
               </div>
             ) : (
-              <Button variant="ghost" className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-400 hover:bg-gray-50 p-0">+</Button>
+              <Button
+                variant="ghost"
+                className="w-8 h-8 rounded-lg border border-gray-200 bg-white flex items-center justify-center text-gray-400 hover:bg-gray-50 p-0"
+              >
+                +
+              </Button>
             )}
           </TableCell>
           <TableCell className="px-5 py-4">
             {tab === "waiting" && r.approval === "rejected" ? (
               <span className="text-gray-300">--</span>
             ) : r.tasks > 0 ? (
-              <div className="relative w-8 h-8 flex items-center justify-center">
+              <div className="relative inline-flex w-8 h-8 rounded-lg border border-gray-200 bg-white items-center justify-center">
                 <ClipboardList size={16} className="text-amber-500" />
-                <span className="absolute -top-1 -right-1 text-[9px] font-bold text-violet-600">{r.tasks}</span>
+                <span className="absolute -top-1.5 -right-1.5 flex items-center justify-center w-3.5 h-3.5 rounded-full border border-gray-200 bg-white text-[9px] font-bold text-violet-600 leading-none">
+                  {r.tasks}
+                </span>
               </div>
             ) : (
-              <span className="text-gray-300">--</span>
+              <Button
+                variant="ghost"
+                className="w-8 h-8 rounded-lg border border-gray-200 bg-white flex items-center justify-center text-gray-400 hover:bg-gray-50 p-0"
+              >
+                +
+              </Button>
             )}
           </TableCell>
         </>
@@ -107,7 +128,7 @@ export default function BookingRow({
           )}
           {tab !== "deleted" && !(tab === "waiting" && r.approval === "rejected") && !(tab === "waiting" && r.approval === "pending") && (
             <Button variant="ghost" className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 p-0">
-              <Wallet size={14} />
+              <IndianRupee size={14} />
             </Button>
           )}
           <ActionMenu

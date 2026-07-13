@@ -77,6 +77,8 @@
   --text-dark-grey: #F3F3F3;
   --color-darkest-grey: #020202;
   --text-darket-grey: #020202;
+  --text-green-medium: #4CA640;
+  --color-green-medium: #4CA640;
 
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);

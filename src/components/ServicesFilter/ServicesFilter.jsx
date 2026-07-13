@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { X, RefreshCw, Check, Plane, Building2, Bus, Ticket, PersonStanding, Contact, ShieldCheck, LayoutGrid } from "lucide-react";
-import { SERVICE_TYPES } from "../data/mockData";
+import { SERVICE_TYPES } from "@/data/mockData";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";

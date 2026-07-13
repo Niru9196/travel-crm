@@ -1,10 +1,10 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { SidebarProvider } from "@/hooks/useSidebar";
-import Sidebar from "./components/Sidebar";
-import BookingsPage from "./pages/BookingsPage";
-import BookingCalendarPage from "./pages/BookingCalendarPage";
-import CustomerLedgerPage from "./pages/CustomerLedgerPage";
+import Sidebar from "@/layout/Sidebar";
+import BookingsPage from "@/pages/BookingsPage";
+import BookingCalendarPage from "@/pages/BookingCalendarPage";
+import CustomerLedgerPage from "@/pages/CustomerLedgerPage";
 
 export default function App() {
   return (

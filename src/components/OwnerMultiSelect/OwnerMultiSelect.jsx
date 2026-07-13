@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronDown, X, RefreshCw, Check } from "lucide-react";
-import { ALL_OWNERS } from "../data/mockData";
+import { ALL_OWNERS } from "@/data/mockData";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";

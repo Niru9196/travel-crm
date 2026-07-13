@@ -1,6 +1,6 @@
 import React from "react";
 import { Plane, Building2, Bus } from "lucide-react";
-import { OWNER_COLORS, STATUS_STYLES } from "../data/mockData";
+import { OWNER_COLORS, STATUS_STYLES } from "@/data/mockData";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 

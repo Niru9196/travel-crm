@@ -2,28 +2,17 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Calculator, ArrowUpRight, ArrowDownLeft, CalendarDays, Filter,
-  ChevronLeft, ChevronRight, MoreVertical, Plane, MapPin, Bus, Search,
-  ArrowDownLeft as GotIcon, ArrowUpRight as GaveIcon, Clock, RefreshCcw, Pencil, Trash2,
+  ChevronLeft, ChevronRight, MoreVertical, Search,
 } from "lucide-react";
-import Topbar from "../components/Topbar";
-import { currency } from "../components/Shared";
-import { CALENDAR_DAYS, TIME_SLOTS } from "../data/mockData";
+import Topbar from "@/layout/Topbar";
+import { currency } from "@/components/Shared/Shared";
+import { CALENDAR_DAYS, TIME_SLOTS } from "@/data/mockData";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-
-function Pill({ icon: Icon, label, value, tone }) {
-  const toneClass = tone === "green" ? "text-emerald-600" : tone === "red" ? "text-rose-600" : "text-gray-900";
-  return (
-    <div className="flex items-center gap-2 text-sm text-gray-500">
-      <Icon size={15} className="text-gray-400" />
-      <span>{label}</span>
-      <span className={`font-semibold ${toneClass}`}>{value}</span>
-    </div>
-  );
-}
-
-const TYPE_ICON = { Flight: Plane, UAE: MapPin, Transport: Bus };
-const TYPE_DOT = { Flight: "bg-emerald-500", UAE: "bg-amber-500", Transport: "bg-sky-500" };
+import Pill from "@/components/Shared/Pill";
+import EventCard from "@/components/BookingCalendarPage/EventCard";
+import ContextMenu from "@/components/BookingCalendarPage/ContextMenu";
+import LegendDot from "@/components/BookingCalendarPage/LegendDot";
 
 const SLOT_HEIGHT = 56; // px per hour row, must match the h-14 grid rows below
 const CARD_HEIGHT = 84; // rendered card height incl. margin, keeps cards from touching
@@ -48,68 +37,6 @@ function layoutEvents(events) {
   });
 }
 
-function EventCard({ ev, onMenu }) {
-  const Icon = TYPE_ICON[ev.type] || Plane;
-  return (
-    <div
-      className="absolute left-1 right-1 bg-white border border-gray-200 rounded-xl shadow-xs px-3 py-2 hover:shadow-md transition-shadow cursor-pointer"
-      style={{ top: ev.top, height: CARD_HEIGHT - 8 }}
-    >
-      <div className="flex items-center justify-between mb-1">
-        <div className="flex items-center gap-1.5">
-          <span className={`w-1.5 h-1.5 rounded-full ${TYPE_DOT[ev.type] || "bg-gray-400"}`} />
-          <span className="text-xs font-semibold text-gray-900 underline">{ev.id}</span>
-        </div>
-        <Button variant="ghost" onClick={(e) => { e.stopPropagation(); onMenu(ev, e); }} className="text-gray-400 hover:text-gray-600 p-0 h-auto">
-          <MoreVertical size={13} />
-        </Button>
-      </div>
-      <div className="flex items-center gap-1.5 text-xs text-violet-600 mb-1">
-        <Icon size={12} />
-        {ev.type}
-      </div>
-      <div className="flex items-center gap-1 text-[11px] text-gray-400">
-        <Clock size={10} />
-        {ev.time}
-        <span className="ml-1 text-gray-500 truncate">{ev.label}</span>
-      </div>
-    </div>
-  );
-}
-
-function ContextMenu({ pos, onClose }) {
-  if (!pos) return null;
-  const items = [
-    { label: "You Got", icon: GotIcon, tone: "text-emerald-600" },
-    { label: "You Gave", icon: GaveIcon, tone: "text-rose-600" },
-    { label: "Reschedule", icon: RefreshCcw, tone: "text-gray-700" },
-    { label: "Change Status", icon: Clock, tone: "text-gray-700" },
-    { label: "Edit", icon: Pencil, tone: "text-gray-700" },
-    { label: "Delete", icon: Trash2, tone: "text-rose-600" },
-  ];
-  return (
-    <>
-      <div className="fixed inset-0 z-30" onClick={onClose} />
-      <div
-        className="fixed z-40 w-48 bg-white border border-gray-100 rounded-xl shadow-xl py-1"
-        style={{ top: pos.y, left: pos.x }}
-      >
-        {items.map((it, i) => (
-          <Button
-            key={it.label}
-            variant="ghost"
-            onClick={onClose}
-            className={`w-full flex items-center gap-2.5 px-3 py-2.5 text-sm hover:bg-gray-50 text-left justify-start rounded-none ${it.tone} ${i === 3 ? "border-t border-gray-100" : ""}`}
-          >
-            <it.icon size={14} />
-            {it.label}
-          </Button>
-        ))}
-      </div>
-    </>
-  );
-}
-
 export default function BookingCalendarPage() {
   const navigate = useNavigate();
   const [menuPos, setMenuPos] = useState(null);
@@ -121,7 +48,7 @@ export default function BookingCalendarPage() {
   const totalCompleted = 14, totalOnTrip = 3, totalUpcoming = 0, totalCancelled = 1;
 
   return (
-    <div className="max-w-[1400px] mx-auto px-6 py-6">
+    <div className="mx-auto px-6 py-6">
       <Topbar crumbs={["Finance", "Bookings", "Booking Calendar"]} />
 
       <div className="flex items-center justify-between mb-4">
@@ -245,15 +172,6 @@ export default function BookingCalendarPage() {
       </div>
 
       <ContextMenu pos={menuPos} onClose={() => setMenuPos(null)} />
-    </div>
-  );
-}
-
-function LegendDot({ color, label }) {
-  return (
-    <div className="flex items-center gap-1.5 text-xs text-gray-500">
-      <span className={`w-2 h-2 rounded-full ${color}`} />
-      {label}
     </div>
   );
 }

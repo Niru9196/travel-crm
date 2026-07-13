@@ -3,14 +3,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   Eye, Pencil, RefreshCw, CalendarDays, ChevronDown,
 } from "lucide-react";
-import Topbar from "../components/Topbar";
-import { Toggle, currency } from "../components/Shared";
-import { Pagination } from "../components/ActionMenu";
-import DateFilterDropdown from "../components/DateFilterDropdown";
+import Topbar from "@/layout/Topbar";
+import { Toggle, currency } from "@/components/Shared/Shared";
+import { Pagination } from "@/components/Shared/ActionMenu";
+import DateFilterDropdown from "@/components/Shared/DateFilterDropdown";
 import {
   PdfDropdown, PdfViewOverlay, DownloadLedgerModal, ShareLedgerModal, PaymentSideSheet,
-} from "../components/LedgerModals";
-import { CUSTOMERS, entryStyle } from "../data/mockData";
+} from "@/components/LedgerModals/LedgerModals";
+import { CUSTOMERS, entryStyle } from "@/data/mockData";
 import { Table, TableHeader, TableBody, TableHead, TableRow, TableCell } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 
@@ -65,7 +65,7 @@ export default function CustomerLedgerPage() {
   const pageRows = rows.slice(start - 1, end);
 
   return (
-    <div className="max-w-[1400px] mx-auto px-6 py-6">
+    <div className="mx-auto px-6 py-6">
       <Topbar crumbs={["Finance", "Bookings", "Ledger"]} />
 
       {/* Heading */}

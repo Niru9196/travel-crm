@@ -71,7 +71,7 @@ export default function Sidebar() {
       <aside
         className={cn(
           "shrink-0 bg-white border-r border-gray-100 flex flex-col h-screen sticky top-0 transition-all duration-200 ease-in-out overflow-hidden",
-          collapsed ? "w-[60px]" : "w-[220px]"
+          collapsed ? "w-[60px]" : "w-[280px]"
         )}
       >
         {/* Logo */}

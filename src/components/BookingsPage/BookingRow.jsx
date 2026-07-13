@@ -30,8 +30,8 @@ export default function BookingRow({
     <TableRow
       key={r.id}
       className={cn(
-        i % 2 === 1 ? "bg-gray-50/60" : "",
-        isSelected && "bg-violet-50/60",
+        "bg-white ring-1 ring-inset ring-gray-100 shadow-sm transition-shadow duration-150 hover:shadow-md rounded-3xl",
+        isSelected && "bg-violet-50/60 ring-violet-200",
         approvalBorder
       )}
     >

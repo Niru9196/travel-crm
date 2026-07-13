@@ -43,9 +43,9 @@ export default function BookingTable({
   setStatusView,
 }) {
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
-      <div className="flex items-center justify-between px-5 pt-4">
-        <div className="flex items-center gap-6">
+    <div className="bg-white border border-gray-200 rounded-3xl overflow-hidden shadow-sm">
+      <div className="flex flex-col gap-4 px-6 pt-5 pb-3 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex flex-wrap items-center gap-5">
           {[
             { key: "bookings", label: "Bookings" },
             { key: "deleted", label: "Deleted" },
@@ -57,7 +57,7 @@ export default function BookingTable({
               size="sm"
               onClick={() => switchTab(t.key)}
               className={cn(
-                "pb-3 text-sm font-medium border-b-2 -mb-px transition-colors rounded-none h-auto px-0",
+                "pb-3 text-sm font-semibold border-b-2 -mb-px transition-colors rounded-none h-auto px-0",
                 tab === t.key
                   ? "text-violet-600 border-violet-600"
                   : "text-gray-400 border-transparent hover:text-gray-600"
@@ -82,7 +82,7 @@ export default function BookingTable({
           )}
         </div>
 
-        <div className="flex items-center gap-4 pb-3">
+        <div className="flex flex-wrap items-center gap-4 pb-3">
           <Toggle checked={showIncomplete} onChange={setShowIncomplete} label="Show Incomplete Bookings" />
           <span className="text-xs font-semibold bg-amber-50 text-amber-600 px-2.5 py-1 rounded-full">
             Total {sortedRows.length}
@@ -92,10 +92,10 @@ export default function BookingTable({
 
       <div className="border-t border-gray-100" />
 
-      <div className="overflow-x-auto">
-        <Table className="w-full text-sm">
+      <div className="overflow-x-auto pb-4">
+        <Table className="w-full min-w-full text-sm border-separate border-spacing-y-3">
           <TableHeader>
-            <TableRow className="text-left">
+            <TableRow className="bg-white text-left text-xs uppercase tracking-wide text-gray-400 border-b border-gray-100">
               {selectMode && <TableHead className="px-5 py-3 w-10" />}
               <TableHead className="px-5 py-3">
                 <span className="text-xs uppercase tracking-wide font-semibold text-gray-400">Booking ID</span>
@@ -158,7 +158,7 @@ export default function BookingTable({
               </TableHead>
             </TableRow>
           </TableHeader>
-          <TableBody>
+          <TableBody className="divide-y divide-transparent">
             {pageRows.map((r, i) => (
               <BookingRow
                 key={r.id}

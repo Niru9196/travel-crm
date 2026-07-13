@@ -108,7 +108,7 @@ export default function BookingFilters({
           )}
         </div>
 
-        <div className="flex-1 min-w-0 rounded-2xl border border-gray-200 bg-white px-4 py-3 shadow-sm">
+        <div className="flex min-w-0 rounded-2xl border border-gray-200 bg-white px-4 py-3 shadow-sm">
           <div className="flex items-center gap-3">
             <Search size={16} className="text-gray-400" />
             <Input

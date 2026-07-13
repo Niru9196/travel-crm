@@ -6,14 +6,21 @@ import BookingSummary from "@/components/BookingsPage/BookingSummary";
 import BookingFilters from "@/components/BookingsPage/BookingFilters";
 import BookingTable from "@/components/BookingsPage/BookingTable";
 import { applyBookingFilters, applyColumnFilters, sortRows, sortRowsByBookingDate, computeBookingSummary } from "@/utils/booking-page-utils";
+import {
+  BOOKING_TAB_OPTIONS,
+  WAITING_FILTER_OPTIONS,
+  ROWS_PER_PAGE_OPTIONS,
+  DEFAULT_BOOKING_COLUMN_FILTERS,
+  DEFAULT_SORT_CONFIG,
+} from "@/constants/bookings";
 
 export default function BookingsPage() {
   const navigate = useNavigate();
 
-  const [tab, setTab] = useState("bookings");
-  const [waitingFilter, setWaitingFilter] = useState("All");
+  const [tab, setTab] = useState(BOOKING_TAB_OPTIONS[0].key);
+  const [waitingFilter, setWaitingFilter] = useState(WAITING_FILTER_OPTIONS[0]);
   const [showIncomplete, setShowIncomplete] = useState(false);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(ROWS_PER_PAGE_OPTIONS[0]);
   const [page, setPage] = useState(1);
   const [openFilter, setOpenFilter] = useState(null);
   const [ownerFilter, setOwnerFilter] = useState(null);
@@ -21,8 +28,8 @@ export default function BookingsPage() {
   const [travelDateFilter, setTravelDateFilter] = useState(null);
   const [servicesFilter, setServicesFilter] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [sortConfig, setSortConfig] = useState({ key: null, dir: null });
-  const [columnFilters, setColumnFilters] = useState({ pax: [], service: [], travelDate: [] });
+  const [sortConfig, setSortConfig] = useState(DEFAULT_SORT_CONFIG);
+  const [columnFilters, setColumnFilters] = useState(DEFAULT_BOOKING_COLUMN_FILTERS);
   const [statusView, setStatusView] = useState("payment");
   const [selectMode, setSelectMode] = useState(false);
   const [selected, setSelected] = useState([]);

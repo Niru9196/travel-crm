@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
 import { currency } from "@/components/Shared/Shared";
 import { Button } from "@/components/ui/button";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import { ROWS_PER_PAGE_OPTIONS } from "@/constants/bookings";
 
 // Action items per approval state
 export const MORE_ACTIONS_APPROVED = [
@@ -157,7 +158,7 @@ export function Pagination({ page, setPage, totalPages, rowsPerPage, setRowsPerP
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            {[10, 20, 50, 100].map((n) => <SelectItem key={n} value={String(n)}>{n}</SelectItem>)}
+            {ROWS_PER_PAGE_OPTIONS.map((n) => <SelectItem key={n} value={String(n)}>{n}</SelectItem>)}
           </SelectContent>
         </Select>
       </div>

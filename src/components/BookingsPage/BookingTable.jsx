@@ -8,6 +8,7 @@ import { Toggle } from "@/components/Shared/Shared";
 import { Pagination } from "@/components/Shared/ActionMenu";
 import { cn } from "@/lib/utils";
 import BookingRow from "./BookingRow";
+import { BOOKING_TAB_OPTIONS, WAITING_FILTER_OPTIONS } from "@/constants/bookings";
 
 export default function BookingTable({
   tab,
@@ -46,11 +47,7 @@ export default function BookingTable({
     <div className="bg-white border border-gray-200 rounded-3xl overflow-hidden shadow-sm">
       <div className="flex flex-col gap-4 px-6 pt-5 pb-3 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex flex-wrap items-center gap-5">
-          {[
-            { key: "bookings", label: "Bookings" },
-            { key: "deleted", label: "Deleted" },
-            { key: "waiting", label: "Waiting for Approval" },
-          ].map((t) => (
+          {BOOKING_TAB_OPTIONS.map((t) => (
             <Button
               key={t.key}
               variant="ghost"
@@ -73,7 +70,7 @@ export default function BookingTable({
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  {['All', 'Pending', 'Approved', 'Rejected'].map((o) => (
+                  {WAITING_FILTER_OPTIONS.map((o) => (
                     <SelectItem key={o} value={o}>{o}</SelectItem>
                   ))}
                 </SelectContent>

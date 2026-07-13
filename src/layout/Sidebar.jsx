@@ -79,7 +79,7 @@ export default function Sidebar() {
           {collapsed ? (
             <span className="text-xl font-bold text-violet-600 tracking-tight flex justify-center">C</span>
           ) : (
-            <span className="text-2xl font-bold text-violet-600 tracking-tight">ciergo</span>
+            <span className="text-2xl font-bold text-violet-600 tracking-tight">Ciergo</span>
           )}
         </div>
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ChevronDown, CalendarDays, Search, RefreshCw, X } from "lucide-react";
+import { ChevronDown, CalendarDays, Search, RefreshCw, X, ChevronRight } from "lucide-react";
 import DateFilterDropdown from "@/components/Shared/DateFilterDropdown";
 import OwnerMultiSelect from "@/components/OwnerMultiSelect/OwnerMultiSelect";
 import ServicesFilter from "@/components/ServicesFilter/ServicesFilter";
@@ -20,22 +20,22 @@ export default function BookingFilters({
   setPage,
 }) {
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl p-5 mb-4 relative">
-      <div className="grid grid-cols-4 gap-6">
-        <div className="relative">
-          <div className="text-xs font-semibold text-gray-700 mb-2">Booking Date</div>
+    <div className="bg-white border border-gray-200 rounded-3xl p-5 mb-4 shadow-sm">
+      <div className="grid gap-4 lg:grid-cols-[minmax(240px,_1fr)_minmax(240px,_1fr)_minmax(240px,_1fr)_minmax(220px,_1fr)]">
+        <div className="space-y-2">
+          <div className="text-xs font-semibold text-gray-600">Booking Date</div>
           <Button
             variant="ghost"
             onClick={() => setOpenFilter(openFilter === "bookingDate" ? null : "bookingDate")}
             className={cn(
-              "w-full flex items-center gap-2 border rounded-lg px-3 py-2 text-sm h-auto justify-start",
-              bookingDateFilter ? "border-violet-300 bg-violet-50 text-violet-700" : "border-gray-200 text-gray-400"
+              "w-full flex items-center gap-3 rounded-2xl border px-4 py-3 text-sm text-left shadow-sm transition duration-150",
+              bookingDateFilter ? "border-violet-300 bg-violet-50 text-violet-700" : "border-gray-200 bg-white text-gray-500 hover:border-gray-300"
             )}
           >
             <span>{bookingDateFilter?.start || "Start Date"}</span>
-            <ChevronDown size={12} className="rotate-[-90deg]" />
+            <ChevronRight size={14} className="text-gray-300 rotate-90" />
             <span>{bookingDateFilter?.end || "End Date"}</span>
-            <CalendarDays size={14} className="ml-auto text-gray-300" />
+            <CalendarDays size={16} className="ml-auto text-gray-400" />
           </Button>
           {openFilter === "bookingDate" && (
             <DateFilterDropdown
@@ -46,20 +46,20 @@ export default function BookingFilters({
           )}
         </div>
 
-        <div className="relative">
-          <div className="text-xs font-semibold text-gray-700 mb-2">Travel Date</div>
+        <div className="space-y-2">
+          <div className="text-xs font-semibold text-gray-600">Travel Date</div>
           <Button
             variant="ghost"
             onClick={() => setOpenFilter(openFilter === "travelDate" ? null : "travelDate")}
             className={cn(
-              "w-full flex items-center gap-2 border rounded-lg px-3 py-2 text-sm h-auto justify-start",
-              travelDateFilter ? "border-violet-300 bg-violet-50 text-violet-700" : "border-gray-200 text-gray-400"
+              "w-full flex items-center gap-3 rounded-2xl border px-4 py-3 text-sm text-left shadow-sm transition duration-150",
+              travelDateFilter ? "border-violet-300 bg-violet-50 text-violet-700" : "border-gray-200 bg-white text-gray-500 hover:border-gray-300"
             )}
           >
             <span>{travelDateFilter?.start || "Start Date"}</span>
-            <ChevronDown size={12} className="rotate-[-90deg]" />
+            <ChevronRight size={14} className="text-gray-300 rotate-90" />
             <span>{travelDateFilter?.end || "End Date"}</span>
-            <CalendarDays size={14} className="ml-auto text-gray-300" />
+            <CalendarDays size={16} className="ml-auto text-gray-400" />
           </Button>
           {openFilter === "travelDate" && (
             <DateFilterDropdown
@@ -70,60 +70,66 @@ export default function BookingFilters({
           )}
         </div>
 
-        <div className="relative">
-          <div className="text-xs font-semibold text-gray-700 mb-2">Booking Owner</div>
+        <div className="space-y-2">
+          <div className="text-xs font-semibold text-gray-600">Booking Owner</div>
           <Button
             variant="ghost"
             onClick={() => setOpenFilter(openFilter === "owner" ? null : "owner")}
-            className="w-full flex items-center justify-between border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-400 h-auto"
+            className="w-full flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-500 shadow-sm transition duration-150 hover:border-gray-300"
           >
-            {ownerFilter?.owners?.length || ownerFilter?.primary?.length
-              ? `${(ownerFilter.owners || ownerFilter.primary).length} Owner(s) selected`
-              : "Search / Select Owners"}
-            <ChevronDown size={14} />
+            <span>
+              {ownerFilter?.owners?.length || ownerFilter?.primary?.length
+                ? `${(ownerFilter.owners || ownerFilter.primary).length} owner(s) selected`
+                : "Search / Select Owners"}
+            </span>
+            <ChevronDown size={16} className="text-gray-400" />
           </Button>
           {openFilter === "owner" && (
             <OwnerMultiSelect onApply={setOwnerFilter} onClose={() => setOpenFilter(null)} />
           )}
         </div>
 
-        <div className="relative">
-          <div className="text-xs font-semibold text-gray-700 mb-2">Booking Type</div>
+        <div className="space-y-2">
+          <div className="text-xs font-semibold text-gray-600">Booking Type</div>
           <Button
             variant="ghost"
             onClick={() => setOpenFilter(openFilter === "services" ? null : "services")}
-            className="w-full flex items-center justify-between border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 h-auto"
+            className="w-full flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 shadow-sm transition duration-150 hover:border-gray-300"
           >
-            All Bookings <ChevronDown size={14} className="text-gray-400" />
+            <span>All Bookings</span>
+            <ChevronDown size={16} className="text-gray-400" />
           </Button>
           {openFilter === "services" && (
             <ServicesFilter onApply={setServicesFilter} onClose={() => setOpenFilter(null)} />
           )}
         </div>
       </div>
-      <div className="flex items-center gap-3 mt-4">
-        <div className="flex-1 flex items-center gap-2 border border-gray-200 rounded-lg px-3 py-2 text-sm">
-          <Search size={14} className="text-gray-400" />
-          <Input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => { setSearchQuery(e.target.value); setPage(1); }}
-            placeholder="Search by ID / Lead Pax / Amount"
-            className="flex-1 outline-hidden bg-transparent text-sm text-gray-700 placeholder:text-gray-400"
-          />
-          {searchQuery && (
-            <Button variant="ghost" onClick={() => setSearchQuery("")} className="text-gray-400 hover:text-gray-600 p-0 h-auto">
-              <X size={14} />
-            </Button>
-          )}
+
+      <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <div className="flex-1 min-w-0 rounded-2xl border border-gray-200 bg-white px-4 py-3 shadow-sm">
+          <div className="flex items-center gap-3">
+            <Search size={16} className="text-gray-400" />
+            <Input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => { setSearchQuery(e.target.value); setPage(1); }}
+              placeholder="Search by ID / Lead Pax / Amount"
+              className="min-w-0 flex-1 border-0 bg-transparent p-0 text-sm text-gray-700 placeholder:text-gray-400 focus:ring-0"
+            />
+            {searchQuery && (
+              <Button variant="ghost" onClick={() => setSearchQuery("")} className="text-gray-400 hover:text-gray-600 p-0 h-auto">
+                <X size={16} />
+              </Button>
+            )}
+          </div>
         </div>
         <Button
           variant="ghost"
           onClick={resetAllFilters}
-          className="w-9 h-9 rounded-lg border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 p-0 h-auto"
+          className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-gray-200 bg-white text-gray-500 shadow-sm transition hover:bg-gray-50"
           title="Reset all filters"
         >
-          <RefreshCw size={14} />
+          <RefreshCw size={16} />
         </Button>
       </div>
     </div>

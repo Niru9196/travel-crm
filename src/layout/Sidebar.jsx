@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import {
   LayoutGrid, TrendingUp, Settings2, BookMarked, CheckSquare,
   FileText, Landmark, Users, BarChart3, Settings, ChevronRight,
-  ChevronLeft, PanelLeftClose, PanelLeftOpen,
+  PanelLeftClose, PanelLeftOpen,
 } from "lucide-react";
 import { useSidebar } from "@/hooks/useSidebar";
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
@@ -28,15 +28,17 @@ function NavItem({ item, collapsed }) {
       to={item.to || "#"}
       className={({ isActive }) =>
         cn(
-          "flex items-center gap-3 rounded-xl text-sm font-medium transition-all duration-200",
-          collapsed ? "px-2.5 py-2.5 justify-center" : "px-3 py-2.5",
+          "flex items-center gap-3 rounded-xl text-sm font-medium transition-colors duration-150 shrink-0",
+          collapsed
+            ? "w-11 h-11 justify-center mx-auto"
+            : "w-full px-3 py-2.5",
           isActive && item.to
             ? "bg-violet-50 text-violet-600"
-            : "text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+            : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
         )
       }
     >
-      <item.icon size={17} className="shrink-0" />
+      <item.icon size={collapsed ? 20 : 17} className="shrink-0" strokeWidth={collapsed ? 2 : 1.75} />
       {!collapsed && (
         <>
           <span className="flex-1 whitespace-nowrap">{item.label}</span>
@@ -48,11 +50,9 @@ function NavItem({ item, collapsed }) {
 
   if (collapsed) {
     return (
-      <Tooltip delayDuration={0}>
-        <TooltipTrigger asChild>
-          {linkContent}
-        </TooltipTrigger>
-        <TooltipContent side="right" className="font-medium">
+      <Tooltip delayDuration={100}>
+        <TooltipTrigger asChild>{linkContent}</TooltipTrigger>
+        <TooltipContent side="right" sideOffset={10} className="font-medium">
           {item.label}
         </TooltipContent>
       </Tooltip>
@@ -71,7 +71,7 @@ export default function Sidebar() {
       <aside
         className={cn(
           "shrink-0 bg-white border-r border-gray-100 flex flex-col h-screen sticky top-0 transition-all duration-200 ease-in-out overflow-hidden",
-          collapsed ? "w-[60px]" : "w-[280px]"
+          collapsed ? "w-[68px]" : "w-[280px]"
         )}
       >
         {/* Logo */}
@@ -84,59 +84,71 @@ export default function Sidebar() {
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 px-2 space-y-0.5 overflow-y-auto overflow-x-hidden">
+        <nav
+          className={cn(
+            "flex-1 flex flex-col overflow-y-auto overflow-x-hidden",
+            collapsed ? "px-2 gap-2" : "px-2 gap-0.5"
+          )}
+        >
           {NAV.map((item) => (
             <NavItem key={item.label} item={item} collapsed={collapsed} />
           ))}
         </nav>
 
         {/* Bottom section: Settings + Toggle */}
-        <div className="px-2 pb-4 space-y-1">
+        <div className={cn("flex flex-col pb-4", collapsed ? "px-2 gap-2" : "px-2 gap-1")}>
           {/* Settings */}
           {collapsed ? (
-            <Tooltip delayDuration={0}>
+            <Tooltip delayDuration={100}>
               <TooltipTrigger asChild>
                 <NavLink
                   to="#"
-                  className="flex items-center justify-center px-2.5 py-2.5 rounded-xl text-sm font-medium text-gray-500 hover:bg-gray-50"
+                  className="flex items-center justify-center w-11 h-11 mx-auto rounded-xl text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-150"
                 >
-                  <Settings size={17} />
+                  <Settings size={20} strokeWidth={2} />
                 </NavLink>
               </TooltipTrigger>
-              <TooltipContent side="right" className="font-medium">
+              <TooltipContent side="right" sideOffset={10} className="font-medium">
                 Settings
               </TooltipContent>
             </Tooltip>
           ) : (
             <NavLink
               to="#"
-              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-500 hover:bg-gray-50"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100"
             >
-              <Settings size={17} />
+              <Settings size={17} strokeWidth={1.75} />
               <span className="flex-1">Settings</span>
               <ChevronRight size={14} className="text-gray-300" />
             </NavLink>
           )}
 
-          {/* Collapse Toggle Button */}
-          <Button
-            variant="ghost"
-            onClick={toggle}
-            className={cn(
-              "flex items-center rounded-xl text-sm font-medium text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors w-full h-auto",
-              collapsed ? "justify-center px-2.5 py-2.5" : "gap-3 px-3 py-2.5"
-            )}
-            title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-          >
-            {collapsed ? (
-              <PanelLeftOpen size={17} />
-            ) : (
-              <>
-                <PanelLeftClose size={17} />
-                <span className="flex-1 text-left">Collapse</span>
-              </>
-            )}
-          </Button>
+          {/* Collapse / Expand Toggle */}
+          {collapsed ? (
+            <Tooltip delayDuration={100}>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  onClick={toggle}
+                  className="flex items-center justify-center w-11 h-11 mx-auto rounded-xl text-gray-500 hover:bg-gray-100 hover:text-gray-700 transition-colors h-auto p-0"
+                >
+                  <PanelLeftOpen size={20} strokeWidth={2} />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="right" sideOffset={10} className="font-medium">
+                Expand sidebar
+              </TooltipContent>
+            </Tooltip>
+          ) : (
+            <Button
+              variant="ghost"
+              onClick={toggle}
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors w-full h-auto"
+            >
+              <PanelLeftClose size={17} strokeWidth={1.75} />
+              <span className="flex-1 text-left">Collapse</span>
+            </Button>
+          )}
         </div>
       </aside>
     </TooltipProvider>

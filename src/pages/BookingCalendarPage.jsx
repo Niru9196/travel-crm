@@ -88,9 +88,12 @@ export default function BookingCalendarPage() {
           </div>
           <div>
             <div className="text-xs font-semibold text-gray-700 mb-2">Booking ID</div>
-            <div className="flex items-center gap-2 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-400">
+            <div className="flex items-center gap-2 border border-gray-200 rounded-lg px-3 text-sm text-gray-400">
               <Search size={13} className="text-gray-300" />
-              <Input placeholder="Type here" className="outline-hidden text-sm w-full bg-transparent placeholder:text-gray-300" />
+              <Input
+                placeholder="Type here"
+                className="h-auto w-full border-none bg-transparent text-sm outline-none shadow-none focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+              />
             </div>
           </div>
         </div>

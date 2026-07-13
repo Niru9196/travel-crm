@@ -108,7 +108,7 @@ export default function BookingFilters({
           )}
         </div>
 
-        <div className="flex min-w-0 rounded-2xl border border-gray-200 bg-white px-4 py-3 shadow-sm">
+        <div className="flex min-w-0 rounded-2xl border border-gray-200 bg-white px-4 py-2.5 shadow-sm">
           <div className="flex items-center gap-3">
             <Search size={16} className="text-gray-400" />
             <Input
@@ -116,7 +116,7 @@ export default function BookingFilters({
               value={searchQuery}
               onChange={(e) => { setSearchQuery(e.target.value); setPage(1); }}
               placeholder="Search by ID / Lead Pax / Amount"
-              className="min-w-0 flex-1 border-0 bg-transparent p-0 text-sm text-gray-700 placeholder:text-gray-400 focus:ring-0"
+               className="h-auto min-w-0 flex-1 border-0 bg-transparent p-0 text-sm text-gray-700 placeholder:text-gray-400 shadow-none focus-visible:ring-0 focus-visible:ring-offset-0"
             />
             {searchQuery && (
               <Button variant="ghost" onClick={() => setSearchQuery("")} className="text-gray-400 hover:text-gray-600 p-0 h-auto">
